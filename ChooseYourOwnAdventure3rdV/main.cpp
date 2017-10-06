@@ -24,32 +24,38 @@ int main(int argc, const char * argv[]) {
         if(room == "main"){
             
             cout << "Hello? Hello? You hear from a voice in the distance. You are in a dark room.\n";
-            cout << "You have a few options. You can either look for the voice or turn on the lights";
+            cout << "You have a few options. You can either look for the voice or turn on the switch";
             cin >> input;
             
             if(input == "look"){
                 cout << "You have been looking for 30 minutes and you have found nothing. You are very tired. Do you want to sleep or try to stay awake.\n";
                 cin >> input;
                 
-                if(input == "sleep"){
-                    cout << "You have been killed by something unknown.\n";
-                    status = "dead";
+            if(input == "switch"){
+                cout << "The switch caused the roof to colapse and you died.";
+                status = "dead";
+                }
+            if(input == "sleep"){
+                cout << "You have been killed by something unknown.\n";
+                status = "dead";
                     
-                    if(input == "stay awake"){
-                        cout << "You are very tired but you found an energy drink. Would you like to use it\n";
-                        cin >> input;
+            if(input == "stay awake"){
+                cout << "You are very tired but you found an energy drink. Would you like to use it\n";
+                cin >> input;
                         
-                        if(input == "yes"){
-                            cout << "You are feeling very good now and you have found a corner with a staircase and a door, which one will you choose?\n";
-                            cin >> input;
+            if(input == "yes"){
+                cout << "You are feeling very good now and you have found a corner with a staircase and a door, which one will you choose?\n";
+                cin >> input;
                             
-                            if(input == "staircase")
-                                cout << "You are on a higher floor now. Welcome to the second floor.\n";
+            if(input == "staircase")
+                cout << "You are on a higher floor now. Welcome to the second floor.\n";
+                room = "floortwo";
                             
-                            if (input == "door"){
-                                cout << "3 deadly snakes come at you and you have no defense! You have been killed.\n";
-                                status = "dead";
+            if (input == "door"){
+                cout << "3 deadly snakes come at you and you have no defense! You have been killed.\n";
+                status = "dead";
                             }
+                
                             
                             
                    }
@@ -70,4 +76,4 @@ int main(int argc, const char * argv[]) {
 
 
     }}
-
+    }}

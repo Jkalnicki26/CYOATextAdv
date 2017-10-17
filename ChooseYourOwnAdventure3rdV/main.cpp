@@ -19,6 +19,9 @@ int main(int argc, const char * argv[])
     string swordlevel = "0";
     string minionskilled = "";
     string strategy = "";
+    string monsterskilled = "";
+    string planeticket = "";
+    string water = "";
     
     cout << "Welcome to Choose Your Own Adventure!\n";
     cout << "Please enter your name.\n";
@@ -60,7 +63,7 @@ int main(int argc, const char * argv[])
             }
         }
         
-        if(room == "north" && swordlevel == "0")
+        else if(room == "north" && swordlevel == "0")
         {
             cout << "On the floor there is a strange box would you like to open it?\n";
             
@@ -85,7 +88,7 @@ int main(int argc, const char * argv[])
             
         }
         
-        if(room == "north" && (swordlevel == "1" || swordlevel == "2"))
+        else if(room == "north" && (swordlevel == "1" || swordlevel == "2"))
         {
             cout << "You can go back to the main room or you can try to open the door with a keypad.\n";
             cin >> input;
@@ -95,14 +98,14 @@ int main(int argc, const char * argv[])
                 room = "begin";
             }
             
-            if(input == "door" || input == "Door")
+            else if(input == "door" || input == "Door")
             {
                 room = "door";
             }
             
         }
         
-        if(room == "door")
+        else if(room == "door")
         {
             cout << "What is the code?";
             cin >> input;
@@ -119,7 +122,7 @@ int main(int argc, const char * argv[])
             }
         }
         
-        if(room == "south")
+        else if(room == "south")
         {
             cout << "You hear buzzing. The door is closing in behind you. Do you want to run backwards or forwards?\n";
             cin >> input;
@@ -130,18 +133,19 @@ int main(int argc, const char * argv[])
                 
                 if(swordlevel == "2" && strategy == "friend")
                 {
-                    cout << "Your friend helped you with the strategy and with your sword you slayed all the minions!\n";
+                    cout << "Your friend helped you with the strategy and with your sword you slayed all the minions!\n You also have a piece of paper!";
                     minionskilled = "yes";
+                    planeticket = "yes";
                     
                 }
                 
-                if(strategy == "best")
+                else if(strategy == "best")
                 {
                     cout << "He is a great fighter, but he thought you were an enemy too! You died\n";
                     input = "q";
                 }
                 
-                if(swordlevel == "1")
+                else if(swordlevel == "1")
                 {
                     cout << "Your sword is not powerful enough. You died.\n";
                     input = "q";
@@ -156,33 +160,143 @@ int main(int argc, const char * argv[])
             
         }
         
-        if(room == "south" && minionskilled == "yes")
+        else if(room == "south" && minionskilled == "yes")
         {
             cout << "Theres only one direction you can go. That way is the way you came.\n";
             room = "begin";
         }
         
-        if(room == "east")
+        else if(room == "east")
         {
             cout << "You are in a sketchy hallway with a door and paint on the wall which says dapyek 67854\nYou have 2 options, you can go through the door or go back to main\n";
             cin >> input;
             
             if(input == "door" || input == "Door" || input == "d")
             {
-                cout << "You opened the door and acid started coming out and it killed you in 5 mintues.";
+                cout << "You opened the door and acid started coming out and it killed you in 5 mintues.\n";
                 input = "q";
             }
             
-            if(input == "main" || input == "Main" || input == "m")
+            else if(input == "main" || input == "Main" || input == "m")
             {
                 room = "main";
             }
         }
         
-        if(room == "west")
+        else if(room == "west")
         {
+            cout << "You have found 2 people! You have found and expierenced friend with great strategy and a very good fighter. Which one would you like to fight with.\n";
+            cin >> input;
+            
+            if(input == "Friend" || input == "friend" || input == "f")
+            {
+                cout << "Okay I cant wait to help you with if any unexpected fights occur!\n";
+                strategy = "friend";
+            }
+            else if(input == "Fighter" || input == "fighter")
+            {
+                cout << "I will kill anything in sight! I will help you complete this adventure!\n";
+                strategy = "best";
+            }
+        }
+        
+        else if(room == "west" && (strategy == "friend" || strategy == "best"))
+        {
+            cout << "We can go to main or we can go to get a taxi!\n";
+            cin >> input;
+            
+            if(input == "main" || input == "Main" || input == "m")
+            {
+                room = "main";
+            }
+            
+            else if(input == "taxi" || input == "Taxi" || input == "t")
+            {
+                room = "taxi";
+            }
+        }
+        
+        else if(room == "northtwo")
+        {
+            cout << "A fight begins!\n There is no escape! What fight approach do you want to take? Slow or Fast?";
+            cin >> input;
+            
+            if(input == "slow" || input == "Slow" || input == "s")
+            {
+                cout << "You killed 3 monsters however the 4th one got you!";
+                input = "q";
+            }
+            
+            else if((input == "fast" || input == "Fast" || input == "f") && swordlevel == "1")
+            {
+                cout << "You killed all 4 with one hit! That was impressive! Your sword has leveled up!\n";
+                swordlevel = "2";
+                monsterskilled = "yes";
+            }
             
         }
         
+        else if(room == "northtwo" && monsterskilled == "yes")
+        {
+             cout << "You will be teleported back to main";
+             room = "main";
+        }
+        
+        else if(room == "taxi")
+        {
+            cout  << "You hopped in the taxi.\nWhere would you like to go? The hot room or to the canyon?\n";
+            cin >> input;
+            if(input == "hot" || input == "Hot" || input == "h")
+            {
+                cout << "Your driver gives you a bottle of water.\n";
+                room = "hotroom";
+                water = "yes";
+            }
+            
+            else if(input == "canyon" || input == "Canyon" || input == "c")
+            {
+                cout << "STOP! You yell. Your driver drove to far and the car went down the canyon and you crashed!";
+                input = "q";
+            }
+        }
+        
+        else if(room == "hotroom")
+        {
+            cout << "Fire is everywhere!\nTheres monsters. Do you want to drink water or pour it on your sword.\n";
+            cin >> input;
+            
+            if(input == "drink" || input == "Drink" || input == "d")
+            {
+                cout << "You needed the water on your sword to defeat the fire monsters!";
+                input = "q";
+            }
+            else if(input == "pour")
+            {
+                if(swordlevel == "2")
+                {
+                    cout <<"You killed all the fire monsters because of the help from water!\nYou ran outside to take another Taxi and its taking you somewhere!\n";
+                    room = "airport";
+                }
+                
+                else if(swordlevel == "1")
+                {
+                    cout << "You had the correct idea but your sword wasnt strong enough!\n";
+                }
+            }
+        }
+        
+        else if(room == "airport")
+        {
+            if(planeticket == "yes")
+            {
+                cout << "Congrats you made it on a plane to your hometown! That piece of paper was an important ticket! Congrats on your amazing adventure!";
+            }
+            
+            else
+            {
+                cout << "Sorry you didnt have a plane ticket and you are stuck at the airport";
+                input = "q";
+            }
+        }
     }
 }

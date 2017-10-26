@@ -16,7 +16,7 @@ int main(int argc, const char * argv[])
     string input = "";
     string room = "";
     string name = "";
-    int swordlevel = 1; // Changed to Int
+    int swordlevel = 0; // Changed to Int
     int health = 100;
     string minionskilled = "";
     string strategy = "";
@@ -29,7 +29,7 @@ int main(int argc, const char * argv[])
     cin >> name;
     cout << "Okay " << name << " Get ready to play!\n";
     room = "begin";
-    while ((input != "q" && input != "Q") || health != 0)
+    while ((input != "q" && input != "Q") && health > 0)
     {
         if(room == "begin")
         {
@@ -186,7 +186,7 @@ int main(int argc, const char * argv[])
             }
         }
         
-        else if(room == "west")
+        else if(room == "west" && strategy == "")
         {
             cout << "You have found 2 people! You have found and expierenced friend with great strategy and a very good fighter. Which one would you like to fight with.\n";
             cin >> input;
@@ -210,7 +210,7 @@ int main(int argc, const char * argv[])
             
             if(input == "main" || input == "Main" || input == "m")
             {
-                room = "main";
+                room = "begin";
             }
             
             else if(input == "taxi" || input == "Taxi" || input == "t")
@@ -284,6 +284,7 @@ int main(int argc, const char * argv[])
                 else if(swordlevel == 1)
                 {
                     cout << "You had the correct idea but your sword wasnt strong enough!\n";
+                    input = "q";
                 }
             }
         }

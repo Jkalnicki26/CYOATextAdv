@@ -18,7 +18,7 @@ int main(int argc, const char * argv[])
     string name = "";
     int swordlevel = 0; // Changed to Int
     int health = 100;
-    string minionskilled = "";
+    int minions = 25;
     string strategy = "";
     string monsterskilled = "";
     string planeticket = "";
@@ -72,7 +72,7 @@ int main(int argc, const char * argv[])
             
             if(input == "yes")
             {
-                cout << "Theres a piece of paper and under it you have found a level 1 sword! The paper says this sword could be very valueable so hold on to it!";
+                cout << "Theres a piece of paper and under it you have found a level 1 sword! The paper says this sword could be very valuable so hold on to it!";
                 swordlevel = 1;
             }
             
@@ -91,7 +91,7 @@ int main(int argc, const char * argv[])
         
         else if(room == "north" && (swordlevel == 1 || swordlevel == 2))
         {
-            cout << "You can go back to the main room or you can try to open the door with a keypad.\n";
+            cout << " You can go back to the main room or you can try to open the door with a keypad.\n";
             cin >> input;
             
             if(input == "main" || input == "Main" || input == "m")
@@ -130,14 +130,25 @@ int main(int argc, const char * argv[])
             
             if(input == "Forwards" || input == "forwards" || input == "f")
             {
-                cout << "25 minions are coming at you! You are trying to fight them off!\n";
+                cout << minions << " minions are coming at you! You are trying to fight them off!\n";
                 
-                if(swordlevel == 2 && strategy == "friend")
+                if(swordlevel == 2 && strategy == "friend" && minions == 0)
                 {
-                    cout << "Your friend helped you with the strategy and with your sword you slayed all the minions!\n You also have a piece of paper!";
-                    minionskilled = "yes";
+                    while (minions != 0) {
+                        cout << "Enter hit to hit the minions or enter leave to run away.\n";
+                        cin >> input;
+                        
+                        if (input == "hit" || input == "h" ) {
+                            cout << "You have killed one minion\n";
+                            minions -= 1;
+                        }
+                        else if (input == "leave" || input == "l") {
+                            room = "begin";
+                        }
+                    }
+                }
+                if (minions == 0) {
                     planeticket = "yes";
-                    
                 }
                 
                 else if(strategy == "best")
@@ -146,7 +157,7 @@ int main(int argc, const char * argv[])
                     input = "q";
                 }
                 
-                else if(swordlevel == 1)
+                else if(swordlevel < 2)
                 {
                     cout << "Your sword is not powerful enough. You died.\n";
                     input = "q";
@@ -162,7 +173,7 @@ int main(int argc, const char * argv[])
             
         }
         
-        else if(room == "south" && minionskilled == "yes")
+        else if(room == "south" && minions == 0)
         {
             cout << "Theres only one direction you can go. That way is the way you came.\n";
             room = "begin";
@@ -170,13 +181,13 @@ int main(int argc, const char * argv[])
         
         else if(room == "east")
         {
-            cout << "You are in a sketchy hallway with a door and paint on the wall which says dapyek 67854\nYou have 2 options, you can go through the door or go back to main\n";
+            cout << "You are in a sketchy hallway with a door and paint on the wall which says dapyek edoc si 67854\nYou have 2 options, you can go through the door or go back to main\n";
             cin >> input;
             
             if(input == "door" || input == "Door" || input == "d")
             {
                 health -= 80;
-                cout << "You opened the door and acid started coming out and it injured you! You have lost 80 Health!" << " Your health is now " << health;
+                cout << "You opened the door and acid started coming out and it injured you! You have lost 80 Health!" << " Your health is now " << health << "\n";
                 room = "east";
             }
             
@@ -235,14 +246,16 @@ int main(int argc, const char * argv[])
                 cout << "You killed all 4 with one hit! That was impressive! Your sword has leveled up!\n";
                 swordlevel = 2;
                 monsterskilled = "yes";
+                room = "begin";
+                
             }
             
         }
         
         else if(room == "northtwo" && monsterskilled == "yes")
         {
-             cout << "You will be teleported back to main";
-             room = "main";
+            cout << "You will be teleported back to main";
+            room = "main";
         }
         
         else if(room == "taxi")
@@ -305,3 +318,4 @@ int main(int argc, const char * argv[])
     }
     return 0;
 }
+
